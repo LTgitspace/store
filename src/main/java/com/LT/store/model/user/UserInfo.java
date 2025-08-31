@@ -27,7 +27,7 @@ public class UserInfo {
 
     private String phoneNumber;
 
-    private String address;
+    private String avatarUrl;
 
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
