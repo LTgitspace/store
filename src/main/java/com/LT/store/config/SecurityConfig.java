@@ -40,13 +40,7 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/webjars/**",
-                                "/blogs/display-8-blog",
-                                "/package-types/get-all",
-                                "/api/payments/**",
-                                "/blogs/display-all-blog",
-                                "/surveys/{surveyId}/detail**",
-                                "/coaches",
-                                "/error"
+                                "/swagger-resources/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
