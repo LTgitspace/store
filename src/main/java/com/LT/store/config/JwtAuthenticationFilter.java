@@ -1,4 +1,4 @@
-package com.Swp_391_gr7.smoking_cessation_support_platform_backend.configs;
+package com.LT.store.config;
 
 import com.Swp_391_gr7.smoking_cessation_support_platform_backend.services.jwt.JWTService;
 import jakarta.servlet.FilterChain;

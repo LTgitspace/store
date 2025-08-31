@@ -1,4 +1,4 @@
-package com.Swp_391_gr7.smoking_cessation_support_platform_backend.configs;
+package com.LT.store.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.Swp_391_gr7.smoking_cessation_support_platform_backend.configs;
+package com.LT.store.config;
 
 import com.Swp_391_gr7.smoking_cessation_support_platform_backend.services.jwt.JWTService;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
     private final JWTService jwtService;
 
     public SecurityConfig(JWTService jwtService) {
@@ -32,13 +31,9 @@ public class SecurityConfig {
         JwtAuthenticationFilter jwtFilter = new JwtAuthenticationFilter(jwtService);
 
         http
-                // Tắt CSRF vì chỉ dùng token
                 .csrf(AbstractHttpConfigurer::disable)
-                // Stateless session: không dùng session truyền thống
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Cấu hình authorize requests
                 .authorizeHttpRequests(auth -> auth
-                        // Cho phép không cần auth với các endpoint public
                         .requestMatchers(
                                 "/auth/**",
                                 "/v3/api-docs/**",
@@ -46,20 +41,15 @@ public class SecurityConfig {
                                 "/swagger-ui.html",
                                 "/webjars/**",
                                 "/blogs/display-8-blog",
-//                                "/roles/**",
-//                                "/users/**", // Thêm đường dẫn cho user
-                                "/package-types/get-all", // Thêm đường dẫn cho package types
+                                "/package-types/get-all",
                                 "/api/payments/**",
                                 "/blogs/display-all-blog",
-                                "/surveys/{surveyId}/detail**", // Thêm đường dẫn cho survey
-                                "/coaches",// Thêm đường dẫn cho guest xem  coach
-                                "/error" // Thêm đường dẫn cho lỗi
-
+                                "/surveys/{surveyId}/detail**",
+                                "/coaches",
+                                "/error"
                         ).permitAll()
-                        // Tất cả request khác đều cần authentication
                         .anyRequest().authenticated()
                 )
-                // Thêm filter parse JWT vào trước filter mặc định UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

@@ -1,4 +1,4 @@
-package com.Swp_391_gr7.smoking_cessation_support_platform_backend.configs;
+package com.LT.store.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
@@ -19,5 +19,5 @@ import org.springframework.context.annotation.Configuration;
         scheme = "bearer"
 )
 public class OpenAPIConfig {
-    // Không cần thêm bean gì, annotation ở trên đã đủ để Swagger UI hiểu có security scheme "bearerAuth"
+    // Configuration for Swagger/OpenAPI security scheme
 }
