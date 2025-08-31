@@ -1,4 +1,4 @@
-package com.Swp_391_gr7.smoking_cessation_support_platform_backend.services.jwt;
+package com.LT.store.service.jwt;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -33,17 +33,28 @@ public class JWTService {
 
     public boolean validateToken(String token) {
         try {
+            // Debug: Check secret key length
+            if (secretKey == null || secretKey.length() < 32) {
+                System.err.println("JWT secret key must be at least 32 characters for HS256.");
+                return false;
+            }
             Jwts.parserBuilder()
                     .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
                     .build()
                     .parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
+            // Debug: Print exception details
+            e.printStackTrace();
             return false;
         }
     }
 
     public UUID extractId(String token) throws JwtException {
+        // Debug: Check secret key length
+        if (secretKey == null || secretKey.length() < 32) {
+            throw new JwtException("JWT secret key must be at least 32 characters for HS256.");
+        }
         String rawId = Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
                 .build()
