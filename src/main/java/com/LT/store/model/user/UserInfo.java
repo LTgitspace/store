@@ -25,11 +25,13 @@ public class UserInfo {
 
     private String fullName;
 
+    private String email;
+
     private String phoneNumber;
 
     private String avatarUrl;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+    @JoinColumn(name = "role_name", referencedColumnName = "role_id")
     private Role role;
 }

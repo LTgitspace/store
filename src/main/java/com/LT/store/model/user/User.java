@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    private String email;
+
 
     @CreationTimestamp
     @Column(updatable = false)
