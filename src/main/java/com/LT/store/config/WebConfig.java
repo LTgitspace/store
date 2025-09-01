@@ -1,5 +1,6 @@
 package com.LT.store.config;
 
+import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import lombok.RequiredArgsConstructor;
@@ -31,11 +32,12 @@ public class WebConfig implements WebMvcConfigurer {
 //    }
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI().info(
-                new Info()
-                        .title("API doc")
-                        .version("1.0.0")
-                        .description("API doc")
-        );
+        return new OpenAPI()
+                .components(new Components())
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title("Mom Store API")
+                        .version("v1")
+                        .description("API documentation for Mom Store application"));
+
     }
 }
