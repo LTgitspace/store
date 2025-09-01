@@ -24,5 +24,13 @@ import org.springframework.context.annotation.Configuration;
 )
 public class OpenAPIConfig {
     // Add bean method to create OpenAPI object
-
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .components(new Components())
+                .info(new io.swagger.v3.oas.models.info.Info()
+                        .title("Mom Store API")
+                        .version("v1")
+                        .description("API documentation for Mom Store application"));
+    }
 }

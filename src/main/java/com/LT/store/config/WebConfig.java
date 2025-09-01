@@ -30,14 +30,5 @@ public class WebConfig implements WebMvcConfigurer {
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-    @Bean
-    public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .components(new Components())
-                .info(new io.swagger.v3.oas.models.info.Info()
-                        .title("Mom Store API")
-                        .version("v1")
-                        .description("API documentation for Mom Store application"));
 
-    }
 }
