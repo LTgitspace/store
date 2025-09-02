@@ -7,7 +7,6 @@ import java.util.UUID;
 @Setter
 @Getter
 @Builder
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDTO {
