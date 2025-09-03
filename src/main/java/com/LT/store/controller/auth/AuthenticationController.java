@@ -3,6 +3,7 @@ package com.LT.store.controller.auth;
 import com.LT.store.dto.user.UserDTO;
 import com.LT.store.dto.auth.AuthenticationDTO;
 import com.LT.store.dto.auth.AuthResponse;
+import com.LT.store.dto.auth.ChangePasswordDTO;
 import com.LT.store.service.auth.AuthenticationService;
 import com.LT.store.service.jwt.JWTService;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,15 @@ public class AuthenticationController {
                 .token(token)
                 .build();
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody ChangePasswordDTO dto) {
+        boolean success = authenticationService.changePassword(dto.getUsername(), dto.getOldPassword(), dto.getNewPassword());
+        if (success) {
+            return ResponseEntity.ok("Password changed successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Password change failed");
+        }
     }
 }
