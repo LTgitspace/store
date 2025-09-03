@@ -1,8 +1,10 @@
 package com.LT.store.service.auth;
 
 import com.LT.store.dto.user.UserDTO;
+import com.LT.store.dto.user.UserInfoDTO;
 import com.LT.store.model.user.User;
 import com.LT.store.repository.user.UserRepository;
+import com.LT.store.service.user.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,11 @@ import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImplementation implements AuthenticationService {
-
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserInfoService userInfoService;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -28,6 +32,16 @@ public class AuthenticationServiceImplementation implements AuthenticationServic
                 .password(hashedPassword)
                 .build();
         User savedUser = userRepository.save(user);
+        // Create UserInfo record for the new user
+        UserInfoDTO userInfoDTO = UserInfoDTO.builder()
+                .userId(savedUser.getId())
+                .fullName("")
+                .email("")
+                .phoneNumber("")
+                .avatarUrl("")
+                .roleId(null)
+                .build();
+        userInfoService.create(userInfoDTO);
         return mapToDTO(savedUser);
     }
 
