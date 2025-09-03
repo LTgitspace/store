@@ -57,4 +57,34 @@ public class RoleController {
         RoleDTO role = roleService.getRoleByLevel(level);
         return ResponseEntity.ok(role);
     }
+
+    @PostMapping("/create-admin")
+    public ResponseEntity<RoleDTO> createAdminRole() {
+        RoleCreation adminRole = RoleCreation.builder()
+                .name("admin")
+                .level(0)
+                .build();
+        RoleDTO created = roleService.createRole(adminRole);
+        return ResponseEntity.ok(created);
+    }
+
+    @PostMapping("/create-user")
+    public ResponseEntity<RoleDTO> createUserRole() {
+        RoleCreation adminRole = RoleCreation.builder()
+                .name("user")
+                .level(1)
+                .build();
+        RoleDTO created = roleService.createRole(adminRole);
+        return ResponseEntity.ok(created);
+    }
+
+    @PostMapping("/create-seller")
+    public ResponseEntity<RoleDTO> createSellerRole() {
+        RoleCreation adminRole = RoleCreation.builder()
+                .name("seller")
+                .level(2)
+                .build();
+        RoleDTO created = roleService.createRole(adminRole);
+        return ResponseEntity.ok(created);
+    }
 }
