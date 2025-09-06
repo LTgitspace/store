@@ -19,6 +19,9 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
+    @Column(nullable = false, name = "bardcode")
+    private String barcode;
+
     @Column(nullable = false)
     private String name;
 
