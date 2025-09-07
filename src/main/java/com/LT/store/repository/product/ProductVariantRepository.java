@@ -4,20 +4,23 @@ import com.LT.store.model.product.ProductVariant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface ProductVariantRepository extends JpaRepository<ProductVariant, UUID> {
     // Find all variants by color
-    List<ProductVariant> findAllByColor(String color);
+    Optional<ProductVariant> findAllByColor(String color);
 
     // Find all variants by size
-    List<ProductVariant> findAllBySize(int size);
+    Optional<ProductVariant> findAllBySize(int size);
 
     // Find all variants by price range
-    List<ProductVariant> findAllByPriceBetween(double minPrice, double maxPrice);
+    Optional<ProductVariant> findAllByPriceBetween(double minPrice, double maxPrice);
 
     // Find all variants by description containing (case-insensitive)
-    List<ProductVariant> findAllByDescriptionContainingIgnoreCase(String description);
+    Optional<ProductVariant> findAllByDescriptionContainingIgnoreCase(String description);
+
+    Optional<ProductVariant> findByProductId(UUID id);
 }
+
