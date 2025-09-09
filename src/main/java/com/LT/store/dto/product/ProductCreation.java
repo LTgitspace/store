@@ -1,16 +1,8 @@
 package com.LT.store.dto.product;
 
-
-import lombok.*;
 import java.util.UUID;
 
-@Setter
-@Getter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class ProductDTO {
-    private UUID id;
+public class ProductCreation {
     private String barcode;
     private String name;
     private UUID categoryId;
