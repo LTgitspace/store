@@ -21,17 +21,19 @@ public class RateLimitFilter implements Filter {
     private static final Logger logger = LoggerFactory.getLogger(RateLimitFilter.class);
     private final Map<String, RequestInfo> requestCounts = new ConcurrentHashMap<>();
     private final Map<String, BanInfo> bannedIps = new ConcurrentHashMap<>();
-    private static final int MAX_REQUESTS = 100;   // limit per window
+    private static final int MAX_REQUESTS = 10;   // limit per window
     private static final long WINDOW_MS = 60_000; // 1 minute
     private static final int BAN_THRESHOLD = 3; // Number of times to exceed before ban
     private static final long BAN_TIME_MS = 5 * 60_000; // 5 minutes
+    private static final long BAN = BAN_TIME_MS/1000;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         HttpServletRequest httpReq = (HttpServletRequest) request;
         HttpServletResponse httpRes = (HttpServletResponse) response;
-        String clientIp = getClientIp(httpReq);
+        String clientIp = "127.0.0.1"; // Default to localhost for testing
+                                        // getClientIp(httpReq);    for production
         long now = Instant.now().toEpochMilli();
 
         // Clean up expired bans
@@ -42,7 +44,7 @@ public class RateLimitFilter implements Filter {
         if (banInfo != null && now < banInfo.banExpiresAt) {
             logger.warn("Blocked banned IP: {}", clientIp);
             httpRes.setStatus(429);
-            httpRes.getWriter().write("Too many requests. You are temporarily banned. Try again later.");
+            httpRes.getWriter().write("Its either youre spamming or youre a bot net, you are temporarily banned. Try again after " + BAN + " seconds." );
             return;
         }
 
